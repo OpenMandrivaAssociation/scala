@@ -25,6 +25,8 @@ BuildRequires:	ant-contrib
 BuildRequires:	ant-nodeps
 BuildRequires:	jline >= 2.8.1
 BuildRequires:	jpackage-utils
+BuildRequires:	crimson
+BuildRequires:	jaxp >= 1.3
 Requires:	java
 Requires:	jline
 Requires:	jpackage-utils
