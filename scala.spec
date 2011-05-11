@@ -23,7 +23,7 @@ BuildRequires:	java-devel >= 1.6.0
 BuildRequires:	ant
 BuildRequires:	ant-contrib
 BuildRequires:	ant-nodeps
-BuildRequires:	jline
+BuildRequires:	jline >= 2.8.1
 BuildRequires:	jpackage-utils
 Requires:	java
 Requires:	jline
