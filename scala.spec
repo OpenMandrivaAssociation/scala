@@ -20,10 +20,10 @@ Patch2:		scala-2.8.0-tooltemplate.patch
 # Force build with openjdk/icedtea because gij is horribly slow and I haven't
 # been successful at integrating aot compilation with the build process
 BuildRequires:	java-devel >= 1.6.0
-BuildRequires:	ant
+BuildRequires:	ant >= 2.8.1
 BuildRequires:	ant-contrib
 BuildRequires:	ant-nodeps
-BuildRequires:	jline >= 2.8.1
+BuildRequires:	jline
 BuildRequires:	jpackage-utils
 BuildRequires:	crimson
 BuildRequires:	jaxp >= 1.3
