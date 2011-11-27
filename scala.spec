@@ -1,7 +1,7 @@
 Name:           scala
 Version:        2.8.1
 %define fullversion %{version}.final
-Release:        2
+Release:        4
 Summary:        A hybrid functional/object-oriented language for the JVM
 BuildArch:      noarch
 Group:          Development/Java
