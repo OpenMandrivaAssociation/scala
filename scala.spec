@@ -9,11 +9,11 @@
 
 %global junit_pkg junit
 
-%global bootstrap_build 1
+%global bootstrap_build 0
 
 Name:           scala
 Version:        2.10.4
-Release:        3.2
+Release:        3.3
 Summary:        A hybrid functional/object-oriented language for the JVM
 BuildArch:      noarch
 ExcludeArch:    %{arm}
