@@ -1,35 +1,23 @@
+%{?_javapackages_macros:%_javapackages_macros}
 %global fullversion %{version}
 %global release_repository http://nexus.scala-tools.org/content/repositories/releases
 %global snapshot_repository http://nexus.scala-tools.org/content/repositories/snapshots
-%if 0%{?fedora} > 19
 %global jansi_jar %{_javadir}/jansi/jansi.jar
-%else
-%global jansi_jar %{_javadir}/jansi.jar
-%endif
-%if 0%{?fedora} > 20
 %global jline2_jar %{_javadir}/jline/jline.jar
-%else
-%global jline2_jar %{_javadir}/jline2.jar
-%endif
 %global scaladir %{_datadir}/scala
-
-%if 0%{?fedora} > 19
 %global apidoc %{_docdir}/%{name}-apidoc
-%else
-%global apidoc %{_docdir}/%{name}-apidoc-%{version}
-%endif
 
 %global junit_pkg junit
 
-%global bootstrap_build 0
+%global bootstrap_build 1
 
 Name:           scala
 Version:        2.10.4
-Release:        3%{?dist}
+Release:        3.1
 Summary:        A hybrid functional/object-oriented language for the JVM
 BuildArch:      noarch
 ExcludeArch:    %{arm}
-Group:          Development/Languages
+Group:          Development/Other
 # License was confirmed to be standard BSD by fedora-legal
 # https://www.redhat.com/archives/fedora-legal-list/2007-December/msg00012.html
 License:        BSD
@@ -79,11 +67,7 @@ BuildRequires:  java-devel >= 1:1.7.0
 BuildRequires:  ant
 BuildRequires:  ant-junit
 BuildRequires:  ant-contrib
-%if 0%{?fedora} > 20
 BuildRequires:  jline >= 2.10
-%else
-BuildRequires:  jline2
-%endif
 BuildRequires:  javapackages-tools
 BuildRequires:  shtool
 BuildRequires:  aqute-bnd
@@ -98,15 +82,9 @@ BuildRequires:  scala
 Requires:       jpackage-utils
 Requires:       jansi
 
-%if 0%{?fedora} > 20
 Requires:       java-headless >= 1:1.7.0
 Requires:       jline >= 2.10
 %global want_jdk8 1
-%else
-Requires:       java >= 1:1.7.0
-Requires:       jline2
-%global want_jdk8 0
-%endif
 
 Requires:       %{jansi_jar}
 Requires:       %{jline2_jar}
@@ -133,20 +111,20 @@ reference and API documentation for the Scala programming language.
 
 %package swing
 Summary:        The swing library for the scala programming languages
-Group:          Development/Libraries
+Group:          Development/Java
 Requires:       scala = %{version}-%{release}
 
-%if 0%{?fedora} > 20
 Requires:       java >= 1:1.7.0
-%endif
 
 %description swing
-This package contains the swing library for the scala programming languages. This library is required to develope GUI-releate applications in scala. The release provided by this package
-is not the original version from upstream because this version is not compatible with JDK-1.7.
+This package contains the swing library for the scala programming languages. 
+This library is required to develope GUI-releate applications in scala. The
+release provided by this package is not the original version from upstream
+because this version is not compatible with JDK-1.7.
 
 %package -n ant-scala
 Summary:        Development files for Scala
-Group:          Development/Languages
+Group:          Development/Other
 Requires:       scala = %{version}-%{release}, ant
 
 %description -n ant-scala
@@ -157,7 +135,7 @@ the scala ant tasks.
 %if 0
 %package examples
 Summary:        Examples for the Scala programming language
-Group:          Development/Languages
+Group:          Development/Other
 # Otherwise it will pick up some perl module
 Autoprov:       0
 Requires:       scala = %{version}-%{release}
@@ -170,13 +148,15 @@ the Scala programming language
 
 %package swing-examples
 Summary:        Examples for the Scala Swing library
-Group:          Development/Libraries
+Group:          Development/Java
 Requires:       scala = %{version}-%{release}
 Requires:       ant
 
 %description swing-examples
-This package contains examples for the Swing library of the Scala language which is required
-to create GUI applications in the Scala programming language. 
+This package contains examples for the Swing library of the Scala language 
+which is required to create GUI applications in the Scala programming
+language. 
+
 %endif
 
 %prep
@@ -189,7 +169,7 @@ to create GUI applications in the Scala programming language.
 %patch3 -p1 -b .compiler-pom
 %patch4 -p1 -b .jdk7
 %patch6 -p1 -b .rvk
-# %patch7 -p1 -b .bc
+# patch7 -p1 -b .bc
 %patch8 -p1 -b .bld
 
 echo "starr.version=2.10.4\nstarr.use.released=0" > starr.number
@@ -355,6 +335,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_javadir}/%{name}/%{name}-reflect.jar
 %{_javadir}/%{name}/scalap.jar
 %dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/lib
 %{_datadir}/%{name}/lib/j*.jar
 %{_datadir}/%{name}/lib/%{name}-compiler.jar
 %{_datadir}/%{name}/lib/%{name}-library.jar
