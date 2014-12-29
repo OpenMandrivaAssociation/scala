@@ -86,9 +86,6 @@ Requires:       java-headless >= 1:1.7.0
 Requires:       jline >= 2.10
 %global want_jdk8 1
 
-Requires:       %{jansi_jar}
-Requires:       %{jline2_jar}
-
 %{?filter_setup:
 %filter_from_requires /ant/d;
 %filter_setup
