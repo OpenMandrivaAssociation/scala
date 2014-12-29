@@ -1,7 +1,7 @@
-diff -up scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-unix.tmpl.tooltemplate scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-unix.tmpl
---- scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-unix.tmpl.tooltemplate	2010-08-15 02:18:09.365756959 -0600
-+++ scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-unix.tmpl	2010-08-15 02:21:16.517801279 -0600
-@@ -8,35 +8,13 @@
+diff -ur ../scala-2.7.4.final-sources.orig/src/compiler/scala/tools/ant/templates/tool-unix.tmpl ./src/compiler/scala/tools/ant/templates/tool-unix.tmpl
+--- ../scala-2.7.4.final-sources.orig/src/compiler/scala/tools/ant/templates/tool-unix.tmpl	2009-03-16 05:55:45.000000000 -0600
++++ ./src/compiler/scala/tools/ant/templates/tool-unix.tmpl	2009-05-18 21:34:52.000000000 -0600
+@@ -8,31 +8,14 @@
  # PARTICULAR PURPOSE.
  ##############################################################################
  
@@ -23,18 +23,15 @@ diff -up scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-u
 -        SOURCE=`dirname "$SOURCE"`/${TARGET:-.};
 -    fi;
 -done;
--
--# see #2092
--SCALA_HOME=`dirname "$SOURCE"`
--SCALA_HOME=`cd "$SCALA_HOME"; pwd -P`
--SCALA_HOME=`cd "$SCALA_HOME"/..; pwd`
--
+-SCALA_HOME=`dirname "$SOURCE"`/..;
+-SCALA_HOME=`cd "$SCALA_HOME"; pwd`;
 -# Remove spaces from SCALA_HOME on windows
 -if $cygwin; then
 -    SCALA_HOME=`cygpath --windows --short-name "$SCALA_HOME"`
 -    SCALA_HOME=`cygpath --unix "$SCALA_HOME"`
 -fi
-+[ -r @@JAVADIR@@-utils/java-functions ] && . @@JAVADIR@@-utils/java-functions || exit 1
++[ -r @@JAVADIR@@-utils/java-functions ] \
++ && . @@JAVADIR@@-utils/java-functions || exit 1
 +
 +set_javacmd || exit 3
 +check_java_env || exit 4
@@ -44,7 +41,7 @@ diff -up scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-u
  
  # Constructing the extension classpath
  TOOL_CLASSPATH="@classpath@"
-@@ -50,16 +28,6 @@ if [ -z "$TOOL_CLASSPATH" ] ; then
+@@ -46,21 +29,8 @@
      done
  fi
  
@@ -57,18 +54,13 @@ diff -up scala-2.8.0.final-sources/src/compiler/scala/tools/ant/templates/tool-u
 -    SCALA_HOME=`cygpath --$format "$SCALA_HOME"`
 -    TOOL_CLASSPATH=`cygpath --path --$format "$TOOL_CLASSPATH"`
 -fi
--
+ 
  # Reminder: substitution ${JAVA_OPTS:=-Xmx256M -Xms16M} DO NOT work on Solaris
  [ -n "$JAVA_OPTS" ] || JAVA_OPTS="@javaflags@"
  
-@@ -75,9 +43,4 @@ do
-   esac
- done 
- 
--
 -if [ -z "$JAVACMD" -a -n "$JAVA_HOME" -a -x "$JAVA_HOME/bin/java" ]; then
 -    JAVACMD="$JAVA_HOME/bin/java"
 -fi
 -
--exec "${JAVACMD:=java}" $JAVA_OPTS -cp "$TOOL_CLASSPATH" -Dscala.home="$SCALA_HOME" -Denv.emacs="$EMACS" @properties@ @class@ @toolflags@ "$@@"
-+exec "${JAVACMD}" $JAVA_OPTS -cp "$TOOL_CLASSPATH" -Dscala.home="$SCALA_HOME" -Denv.emacs="$EMACS" @properties@ @class@ @toolflags@ "$@@"
+-exec "${JAVACMD:=java}" $JAVA_OPTS -cp "$TOOL_CLASSPATH" -Dscala.home="$SCALA_HOME" -Denv.classpath="$CLASSPATH" -Denv.emacs="$EMACS" @properties@ @class@ @toolflags@ "$@@"
++exec "${JAVACMD}" $JAVA_OPTS -cp "$TOOL_CLASSPATH" -Dscala.home="$SCALA_HOME" -Denv.classpath="$CLASSPATH" -Denv.emacs="$EMACS" @properties@ @class@ @toolflags@ "$@@"
