@@ -13,7 +13,7 @@
 
 Name:           scala
 Version:        2.10.4
-Release:        3.3
+Release:        3.4
 Summary:        A hybrid functional/object-oriented language for the JVM
 BuildArch:      noarch
 ExcludeArch:    %{arm}
