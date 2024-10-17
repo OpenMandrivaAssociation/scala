@@ -21,7 +21,7 @@ Group:          Development/Other
 # License was confirmed to be standard BSD by fedora-legal
 # https://www.redhat.com/archives/fedora-legal-list/2007-December/msg00012.html
 License:        BSD
-URL:            http://www.scala-lang.org/
+URL:            https://www.scala-lang.org/
 
 Source0:        https://github.com/scala/scala/archive/v%{version}.tar.gz
 Source1:        scala-library-2.10.0-bnd.properties.in
